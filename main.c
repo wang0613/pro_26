@@ -9,7 +9,7 @@ struct S{
     int arr[0]; //柔性数组成员前面至少有一个其他成员
 };
 
-int main() {
+int main1() {
 
 //    printf("%d\n",sizeof(struct S)); //4
     //为arr开辟20个字节
@@ -26,7 +26,7 @@ int main() {
     struct S* pps = (struct S*)realloc(ps,40);
     if(pps != NULL)
     {
-        ps = pps;
+        ps = pps; //重新开辟的空间的地址 给
     }
     for(i = 1;i <10; i++)
     {
@@ -40,4 +40,36 @@ int main() {
     free(pps);
     pps= NULL;
     return 0;
+}
+
+struct SS
+{
+    int n;
+    int* arr;
+};
+
+int main()
+{
+    struct SS* p = (struct SS*)malloc(sizeof(struct SS));
+    p->n = 100;
+    //为arr 开辟40个字节
+    p->arr = (int*) malloc(10*sizeof(int));
+
+    int i = 0;
+    for(i =0; i <10; i++)
+    {
+        p->arr[i] = i;
+    }
+    for(i = 0 ;i < 10;i++)
+    {
+        printf("%d ",p->arr[i]);
+    }
+
+    free(p->arr);
+    p->arr = NULL;
+    free(p);
+    p= NULL;
+
+    return 0;
+
 }
